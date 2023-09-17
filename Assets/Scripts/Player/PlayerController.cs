@@ -10,4 +10,9 @@ public class PlayerController
         PlayerModel = playerModel;
         PlayerView = playerView;
     }
+
+    public PlayerModel GetPlayerModel()
+    {
+        return PlayerModel;
+    }
 }
