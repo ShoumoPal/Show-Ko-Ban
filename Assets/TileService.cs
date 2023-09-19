@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TileService : GenericMonoSingleton<TileService>
+public class TileService : GenericLazySingleton<TileService>
 {
 
     List<TileController> tileControllers;
@@ -43,10 +43,12 @@ public class TileService : GenericMonoSingleton<TileService>
         if (targetTile == null)
         {
             return true;
-        } else if (targetTile.tileStatus == TileStatus.WALL)
+        } 
+        else if (targetTile.tileStatus == TileStatus.WALL)
         {
             return false;
-        } else
+        } 
+        else
         {
             return true;
         }

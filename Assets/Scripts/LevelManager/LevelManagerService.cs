@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
+public class LevelManagerService : GenericLazySingleton<LevelManagerService>
 {
     public Level[] Levels;
 

@@ -58,5 +58,8 @@ public class PlayerController
         PlayerView.transform.DOMove(targetPosition, PlayerView.duration);
         yield return new WaitForSeconds(PlayerView.duration);
         PlayerModel.IsMoving = false;
+
+        if (EventService.Instance.InvokeOnGoalReached(this.PlayerView.transform.childCount))
+            Debug.Log("Goal reached!");
     }
 }

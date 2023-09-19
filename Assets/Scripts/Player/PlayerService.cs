@@ -3,7 +3,7 @@ using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerService : GenericMonoSingleton<PlayerService>
+public class PlayerService : GenericLazySingleton<PlayerService>
 {
     [SerializeField] private PlayerScriptableObject obj;
 
