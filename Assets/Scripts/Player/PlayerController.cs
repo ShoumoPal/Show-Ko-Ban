@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerController 
 {
@@ -52,6 +53,7 @@ public class PlayerController
         }
     }
 
+    // Move Player Co-routine
     private IEnumerator StartMovement(Vector3 targetPosition)
     {
         PlayerModel.IsMoving = true;
@@ -60,6 +62,10 @@ public class PlayerController
         PlayerModel.IsMoving = false;
 
         if (EventService.Instance.InvokeOnGoalReached(this.PlayerView.transform.childCount))
+        {
             Debug.Log("Goal reached!");
+            LevelManagerService.Instance.SetCurrentLevelComplete();
+            SceneManager.LoadScene(0);
+        }
     }
 }

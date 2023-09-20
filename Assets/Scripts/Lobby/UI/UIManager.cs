@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class UIManager : GenericLazySingleton<UIManager>
 {
@@ -9,17 +10,21 @@ public class UIManager : GenericLazySingleton<UIManager>
 
     public void PanelFadeIn()
     {
+        _levelSelectionCG.gameObject.SetActive(true);
         _levelSelectionCG.alpha = 0f;
         _LevelSelectionRT.transform.localPosition = new Vector3(0f, -1000f, 0f);
         _LevelSelectionRT.DOAnchorPos(new Vector2(0f, 0f), _fadeTime, false).SetEase(Ease.Linear);
         _levelSelectionCG.DOFade(1f, _fadeTime);
     }
 
-    public void PanelFadeOut()
+    public IEnumerator PanelFadeOut()
     {
         _levelSelectionCG.alpha = 1f;
         _LevelSelectionRT.transform.localPosition = new Vector3(0f, 0f, 0f);
-        _LevelSelectionRT.DOAnchorPos(new Vector2(0f, -1000f), _fadeTime, false).SetEase(Ease.InOutQuint);
-        _levelSelectionCG.DOFade(1f, _fadeTime);
+        _LevelSelectionRT.DOAnchorPos(new Vector2(0f, -1000f), _fadeTime, false).SetEase(Ease.Linear);
+        _levelSelectionCG.DOFade(0f, _fadeTime);
+        yield return new WaitForSeconds(_fadeTime);
+
+        _levelSelectionCG.gameObject.SetActive(false);
     }
 }
