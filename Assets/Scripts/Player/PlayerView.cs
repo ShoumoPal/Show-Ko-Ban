@@ -20,7 +20,8 @@ public class PlayerView : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && !PlayerController.GetPlayerModel().IsMoving)
         {
             direction = Vector2.right;
-        } else if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && !PlayerController.GetPlayerModel().IsMoving) 
+        } 
+        else if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && !PlayerController.GetPlayerModel().IsMoving) 
         { 
             direction = Vector2.left;
         }

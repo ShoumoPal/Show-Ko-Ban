@@ -27,7 +27,7 @@ public class PlayerService : GenericLazySingleton<PlayerService>
         playerGameObject.transform.SetParent(TileService.Instance.transform, true);
     }
 
-    public bool isPlayerMovementPossible(PlayerController playerController, Vector2 direction)
+    public bool IsPlayerMovementPossible(PlayerController playerController, Vector2 direction)
     {
         bool isMovementPossible = TileService.Instance.IsMovementPossibleForTileInDirection(direction, playerController.GetPlayerView().transform.position);
         for (int i = 0; i < playerController.GetPlayerView().transform.childCount; i++)
@@ -39,11 +39,22 @@ public class PlayerService : GenericLazySingleton<PlayerService>
         return isMovementPossible;
     }
 
+    public bool CheckIsChildOrPlayerAlreadyPresent(GameObject obj, PlayerController playerController)
+    {
+        for (int i = 0; i < playerController.PlayerView.transform.childCount; i++)
+        {
+            if (obj.GetInstanceID() ==  playerController.PlayerView.transform.GetChild(i).gameObject.GetInstanceID() || obj.GetComponent<TileController>().tileStatus == TileStatus.PLAYER)
+                return true;
+        }
+        Debug.Log("Returning false");
+        return false;
+    }
+
     public List<GameObject> GetGameObjectsInDirection(Vector2 direction, PlayerController playerController)
     {
         List<GameObject> directionGameObjects = new List<GameObject>();
         TileController nearestTileInDirection = TileService.Instance.FetchTileAtPosition(playerController.GetPlayerView().transform.position + (Vector3)direction);
-        if (nearestTileInDirection != null && nearestTileInDirection.tileStatus != TileStatus.WALL) {
+        if (nearestTileInDirection != null && nearestTileInDirection.tileStatus != TileStatus.WALL && nearestTileInDirection.tileStatus != TileStatus.PLAYER) {
             directionGameObjects.Add(nearestTileInDirection.gameObject);
         }
         for (int i = 0; i < playerController.GetPlayerView().transform.childCount; i++)

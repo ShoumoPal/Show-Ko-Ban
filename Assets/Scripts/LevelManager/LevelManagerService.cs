@@ -60,4 +60,9 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
 
         SetLevelStatus(nextLevelName, LevelStatus.Unlocked);
     }
+
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

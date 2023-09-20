@@ -5,6 +5,9 @@ using UnityEngine;
 public enum SoundType
 {
     Button_Click,
+    Move_Sound,
+    Win_Sound,
+    Connect_Sound,
     BG_Music_1
 }
 
@@ -22,6 +25,7 @@ public class AudioService : GenericMonoSingleton<AudioService>
 {
     [SerializeField] private Sound[] _sounds;
     [SerializeField] private AudioSource _soundFX;
+    [SerializeField] private AudioSource _soundFX2;
     [SerializeField] private AudioSource _soundBG;
 
     public void PlayFX(SoundType type)
@@ -30,6 +34,14 @@ public class AudioService : GenericMonoSingleton<AudioService>
         _soundFX.clip = sound.Clip;
         _soundFX.volume = sound.Volume;
         _soundFX.Play();
+    }
+
+    public void PlayFX2(SoundType type)
+    {
+        Sound sound = Array.Find(_sounds, i => i.Type == type);
+        _soundFX2.clip = sound.Clip;
+        _soundFX2.volume = sound.Volume;
+        _soundFX2.Play();
     }
 
     public void PlayBG(SoundType type)

@@ -11,7 +11,7 @@ public class GoalManager : GenericLazySingleton<GoalManager>
     }
     private void Start()
     {
-        goals = GameObject.FindGameObjectsWithTag("Goal");
+        //goals = GameObject.FindGameObjectsWithTag("Goal");
         isGoalReached = false;
     }
     public bool CheckGoalReached(int childCount)
