@@ -8,7 +8,9 @@ public enum SoundType
     Move_Sound,
     Win_Sound,
     Connect_Sound,
-    BG_Music_1
+    BG_Music_1,
+    Wall_Hit_Sound,
+    PopUp_Sound
 }
 
 // public class for sounds

@@ -26,6 +26,13 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
         SetLevelStatus(Levels[0].LevelName, LevelStatus.Unlocked);
     }
 
+    private void Update()
+    {
+        // Restart level logic
+        if(Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().buildIndex != 0)
+            RestartCurrentLevel();
+    }
+
     public Level GetLevelBySceneName(string sceneName)
     {
         Level level = Array.Find(Levels, i => i.LevelName == sceneName);
@@ -64,5 +71,10 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartCurrentLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

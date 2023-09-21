@@ -1379,7 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 7
 --- !u!1 &727549180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 4
 --- !u!1 &794103728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,6 +1695,12 @@ MonoBehaviour:
   - Type: 3
     Volume: 0.3
     Clip: {fileID: 8300000, guid: 25f9ed471ab0bef4d9ea8813d20655a8, type: 3}
+  - Type: 5
+    Volume: 0.3
+    Clip: {fileID: 8300000, guid: ddf7b3cfac2b1b84aa0764d9fdfe0071, type: 3}
+  - Type: 6
+    Volume: 0.5
+    Clip: {fileID: 8300000, guid: b41dd66f8a793ad4eb7a23ef73f4affd, type: 3}
   _soundFX: {fileID: 171475705}
   _soundFX2: {fileID: 2012149558}
   _soundBG: {fileID: 1708168770}
@@ -1858,7 +1864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 8
 --- !u!1 &809247717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,6 +1911,18 @@ MonoBehaviour:
   - LevelName: Level 1
     spawnPoint: {x: -5, y: -3, z: 0}
   - LevelName: Level 2
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 3
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 4
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 5
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 6
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 7
+    spawnPoint: {x: -5, y: -3, z: 0}
+  - LevelName: Level 8
     spawnPoint: {x: -5, y: -3, z: 0}
 --- !u!4 &809247720
 Transform:
@@ -2055,7 +2073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 5
 --- !u!1 &1047025880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2197,7 @@ MonoBehaviour:
   _levelSelectionButton: {fileID: 2036991197}
   _levelSelectionBackButton: {fileID: 2063487583}
   _backgroundUI: {fileID: 1694749489}
+  _playSlider: {fileID: 45532465}
 --- !u!114 &1047025886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3007,7 +3026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 3
 --- !u!1 &1609889975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,7 +3161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eaa9081e90a8b44e986d47d30249753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
+  levelName: Level 6
 --- !u!1 &1670262284
 GameObject:
   m_ObjectHideFlags: 0

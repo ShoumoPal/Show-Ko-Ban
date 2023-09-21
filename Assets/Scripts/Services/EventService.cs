@@ -5,6 +5,7 @@ public class EventService : GenericLazySingleton<EventService>
 {
     public event Func<int, bool> OnGoalReached;
     public event Action OnShowLevelCompletePanel;
+    public event Action OnCameraShake;
 
     public bool InvokeOnGoalReached(int childCount)
     {
@@ -13,5 +14,9 @@ public class EventService : GenericLazySingleton<EventService>
     public void InvokeOnShowLevelCompletePanel()
     {
         OnShowLevelCompletePanel?.Invoke();
+    }
+    public void InvokeOnCameraShake()
+    {
+        OnCameraShake?.Invoke();
     }
 }

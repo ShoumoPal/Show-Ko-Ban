@@ -57,6 +57,11 @@ public class PlayerService : GenericLazySingleton<PlayerService>
         if (nearestTileInDirection != null && nearestTileInDirection.tileStatus != TileStatus.WALL && nearestTileInDirection.tileStatus != TileStatus.PLAYER) {
             directionGameObjects.Add(nearestTileInDirection.gameObject);
         }
+        if(nearestTileInDirection != null && nearestTileInDirection.tileStatus == TileStatus.WALL)
+        {
+            EventService.Instance.InvokeOnCameraShake();
+            AudioService.Instance.PlayFX(SoundType.Wall_Hit_Sound);
+        }
         for (int i = 0; i < playerController.GetPlayerView().transform.childCount; i++)
         {
             Transform childTransform = playerController.GetPlayerView().transform.GetChild(i);
@@ -64,6 +69,11 @@ public class PlayerService : GenericLazySingleton<PlayerService>
             if (nearestChildTileInDirection != null && nearestChildTileInDirection.tileStatus != TileStatus.WALL)
             {
                 directionGameObjects.Add(nearestChildTileInDirection.gameObject);
+            }
+            if (nearestChildTileInDirection != null && nearestChildTileInDirection.tileStatus == TileStatus.WALL)
+            {
+                EventService.Instance.InvokeOnCameraShake();
+                AudioService.Instance.PlayFX(SoundType.Wall_Hit_Sound);
             }
         }
         return directionGameObjects;
