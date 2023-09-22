@@ -90,7 +90,7 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
     {
         SetLevelStatus(SceneManager.GetActiveScene().name, LevelStatus.Completed);
 
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % (Levels.Length + 1);
         string nextLevelName = GetLevelNameFromIndex(nextSceneIndex);
 
         SetLevelStatus(nextLevelName, LevelStatus.Unlocked);
@@ -99,7 +99,7 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
     public void LoadNextLevel()
     {
         hasRestarted = false;
-        StartCoroutine(LoadScene(GetLevelNameFromIndex(SceneManager.GetActiveScene().buildIndex + 1)));
+        StartCoroutine(LoadScene(GetLevelNameFromIndex((SceneManager.GetActiveScene().buildIndex + 1) % (Levels.Length + 1))));
     }
 
     public void RestartCurrentLevel()

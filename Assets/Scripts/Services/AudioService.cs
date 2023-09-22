@@ -10,7 +10,8 @@ public enum SoundType
     Connect_Sound,
     BG_Music_1,
     Wall_Hit_Sound,
-    PopUp_Sound
+    PopUp_Sound,
+    Interference
 }
 
 // public class for sounds

@@ -46,7 +46,6 @@ public class PlayerService : GenericLazySingleton<PlayerService>
             if (obj.GetInstanceID() ==  playerController.PlayerView.transform.GetChild(i).gameObject.GetInstanceID() || obj.GetComponent<TileController>().tileStatus == TileStatus.PLAYER)
                 return true;
         }
-        Debug.Log("Returning false");
         return false;
     }
 

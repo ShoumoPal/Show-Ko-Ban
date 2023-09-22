@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TileService : GenericLazySingleton<TileService>
 {
-
     List<TileController> tileControllers;
     [SerializeField] private Transform _wallParent;
     [SerializeField] private Transform _blockParent;
+    [SerializeField] private Transform _hiddenParent;
 
     private void Start()
     {
@@ -21,11 +22,16 @@ public class TileService : GenericLazySingleton<TileService>
         {
             tileControllers.Add(child.gameObject.GetComponent<TileController>());
         }
+        foreach(Transform child in _hiddenParent)
+        {
+            child.GetComponent<TileController>().tileStatus = TileStatus.HIDDEN;
+            tileControllers.Add(child.gameObject.GetComponent<TileController>());
+        }
     }
 
     public void AddPlayerTileController(GameObject playerGameObject)
     {
-        tileControllers.Add(playerGameObject.GetComponent<TileController>()); 
+        tileControllers.Add(playerGameObject.GetComponent<TileController>());
     }
 
     public TileController FetchTileAtPosition(Vector3 position)
@@ -45,6 +51,7 @@ public class TileService : GenericLazySingleton<TileService>
     {
         Vector3 targetPosition = (Vector3)direction + tileControllerPosition;
         TileController targetTile = FetchTileAtPosition(targetPosition);
+
         if (targetTile == null)
         {
             return true;

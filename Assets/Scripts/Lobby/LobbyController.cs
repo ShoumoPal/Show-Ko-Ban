@@ -19,7 +19,10 @@ public class LobbyController : MonoBehaviour
     private void CheckSliderFull(float value)
     {
         if (_playSlider.value == _playSlider.maxValue)
+        {
             StartCoroutine(LevelManagerService.Instance.LoadScene(LevelManagerService.Instance.Levels[0].LevelName));
+            AudioService.Instance.PlayFX(SoundType.Win_Sound);
+        } 
     }
 
     private void ShowLevelSelectionPanel()

@@ -1835,6 +1835,9 @@ MonoBehaviour:
   - Type: 6
     Volume: 0.5
     Clip: {fileID: 8300000, guid: b41dd66f8a793ad4eb7a23ef73f4affd, type: 3}
+  - Type: 7
+    Volume: 0.8
+    Clip: {fileID: 8300000, guid: 0ebf1f6ea28f704468aef654073dcc88, type: 3}
   _soundFX: {fileID: 171475705}
   _soundFX2: {fileID: 2012149558}
   _soundBG: {fileID: 1708168770}
@@ -2053,11 +2056,11 @@ MonoBehaviour:
   - LevelName: Level 5
     spawnPoint: {x: -5, y: -3, z: 0}
   - LevelName: Level 6
-    spawnPoint: {x: -5, y: -3, z: 0}
+    spawnPoint: {x: -7, y: 0, z: 0}
   - LevelName: Level 7
-    spawnPoint: {x: -5, y: -3, z: 0}
+    spawnPoint: {x: -7, y: 0, z: 0}
   - LevelName: Level 8
-    spawnPoint: {x: -5, y: -3, z: 0}
+    spawnPoint: {x: 0, y: 0, z: 0}
 --- !u!4 &809247720
 Transform:
   m_ObjectHideFlags: 0

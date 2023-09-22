@@ -10,6 +10,7 @@ public class TileEditMode : MonoBehaviour
     [SerializeField] Sprite WallTileSprite;
     [SerializeField] Sprite BlockTileSprite;
     [SerializeField] Sprite PlayerTileSprite;
+    [SerializeField] Sprite HiddenTileSprite;
     [SerializeField] TileStatus tileStatus;
 
     // Update is called once per frame
@@ -21,11 +22,18 @@ public class TileEditMode : MonoBehaviour
         {
             tileController.tileStatus = TileStatus.BLOCK;
             spriteRenderer.sprite = BlockTileSprite;
-        } else if (tileStatus == TileStatus.PLAYER)
+        } 
+        else if (tileStatus == TileStatus.PLAYER)
         {
             tileController.tileStatus = TileStatus.PLAYER;
             spriteRenderer.sprite = PlayerTileSprite;
-        } else
+        }
+        else if(tileStatus == TileStatus.HIDDEN)
+        {
+            tileController.tileStatus = TileStatus.HIDDEN;
+            spriteRenderer.sprite = HiddenTileSprite;
+        }
+        else
         {
             tileController.tileStatus = TileStatus.WALL;
             spriteRenderer.sprite= WallTileSprite;
