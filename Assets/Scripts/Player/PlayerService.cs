@@ -3,7 +3,7 @@ using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerService : GenericMonoSingleton<PlayerService>
+public class PlayerService : GenericLazySingleton<PlayerService>
 {
     [SerializeField] private PlayerScriptableObject obj;
 
@@ -27,7 +27,7 @@ public class PlayerService : GenericMonoSingleton<PlayerService>
         playerGameObject.transform.SetParent(TileService.Instance.transform, true);
     }
 
-    public bool isPlayerMovementPossible(PlayerController playerController, Vector2 direction)
+    public bool IsPlayerMovementPossible(PlayerController playerController, Vector2 direction)
     {
         bool isMovementPossible = TileService.Instance.IsMovementPossibleForTileInDirection(direction, playerController.GetPlayerView().transform.position);
         for (int i = 0; i < playerController.GetPlayerView().transform.childCount; i++)
@@ -39,12 +39,28 @@ public class PlayerService : GenericMonoSingleton<PlayerService>
         return isMovementPossible;
     }
 
+    public bool CheckIsChildOrPlayerAlreadyPresent(GameObject obj, PlayerController playerController)
+    {
+        for (int i = 0; i < playerController.PlayerView.transform.childCount; i++)
+        {
+            if (obj.GetInstanceID() ==  playerController.PlayerView.transform.GetChild(i).gameObject.GetInstanceID() || obj.GetComponent<TileController>().tileStatus == TileStatus.PLAYER)
+                return true;
+        }
+        Debug.Log("Returning false");
+        return false;
+    }
+
     public List<GameObject> GetGameObjectsInDirection(Vector2 direction, PlayerController playerController)
     {
         List<GameObject> directionGameObjects = new List<GameObject>();
         TileController nearestTileInDirection = TileService.Instance.FetchTileAtPosition(playerController.GetPlayerView().transform.position + (Vector3)direction);
-        if (nearestTileInDirection != null && nearestTileInDirection.tileStatus != TileStatus.WALL) {
+        if (nearestTileInDirection != null && nearestTileInDirection.tileStatus != TileStatus.WALL && nearestTileInDirection.tileStatus != TileStatus.PLAYER) {
             directionGameObjects.Add(nearestTileInDirection.gameObject);
+        }
+        if(nearestTileInDirection != null && nearestTileInDirection.tileStatus == TileStatus.WALL)
+        {
+            EventService.Instance.InvokeOnCameraShake();
+            AudioService.Instance.PlayFX(SoundType.Wall_Hit_Sound);
         }
         for (int i = 0; i < playerController.GetPlayerView().transform.childCount; i++)
         {
@@ -53,6 +69,11 @@ public class PlayerService : GenericMonoSingleton<PlayerService>
             if (nearestChildTileInDirection != null && nearestChildTileInDirection.tileStatus != TileStatus.WALL)
             {
                 directionGameObjects.Add(nearestChildTileInDirection.gameObject);
+            }
+            if (nearestChildTileInDirection != null && nearestChildTileInDirection.tileStatus == TileStatus.WALL)
+            {
+                EventService.Instance.InvokeOnCameraShake();
+                AudioService.Instance.PlayFX(SoundType.Wall_Hit_Sound);
             }
         }
         return directionGameObjects;

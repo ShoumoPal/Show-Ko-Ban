@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerController 
 {
@@ -33,14 +34,17 @@ public class PlayerController
             List<GameObject> directionGameObjects = PlayerService.Instance.GetGameObjectsInDirection(direction, this);
             foreach (GameObject directionGameObject in directionGameObjects)
             {
-                directionGameObject.transform.SetParent(PlayerView.transform, true);
+                if(!PlayerService.Instance.CheckIsChildOrPlayerAlreadyPresent(directionGameObject, this))
+                {
+                    AudioService.Instance.PlayFX2(SoundType.Connect_Sound);
+                    directionGameObject.transform.SetParent(PlayerView.transform, true);
+                }
             }
 
             // MOVE IF POSSIBLE
-            bool isConnectedMovementsPossible = PlayerService.Instance.isPlayerMovementPossible(this, direction);
+            bool isConnectedMovementsPossible = PlayerService.Instance.IsPlayerMovementPossible(this, direction);
             if (isConnectedMovementsPossible)
             {
-                Debug.Log("Starting Coroutine.");
                 Vector3 targetPosition = PlayerView.transform.position + (Vector3)direction;
                 PlayerView.StartCoroutine(StartMovement(targetPosition));
             }
@@ -52,11 +56,21 @@ public class PlayerController
         }
     }
 
+    // Move Player Co-routine
     private IEnumerator StartMovement(Vector3 targetPosition)
     {
         PlayerModel.IsMoving = true;
+        AudioService.Instance.PlayFX(SoundType.Move_Sound);
         PlayerView.transform.DOMove(targetPosition, PlayerView.duration);
         yield return new WaitForSeconds(PlayerView.duration);
         PlayerModel.IsMoving = false;
+
+        if (EventService.Instance.InvokeOnGoalReached(this.PlayerView.transform.childCount))
+        {
+            Debug.Log("Goal reached!");
+            //For when goal is reached
+            LevelManagerService.Instance.SetCurrentLevelComplete();
+            EventService.Instance.InvokeOnShowLevelCompletePanel();
+        }
     }
 }

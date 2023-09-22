@@ -17,25 +17,26 @@ public class PlayerView : MonoBehaviour
     {
         Vector2 direction = Vector2.zero;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && !PlayerController.GetPlayerModel().IsMoving)
+        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && !PlayerController.GetPlayerModel().IsMoving)
         {
             direction = Vector2.right;
-        } else if (Input.GetKeyDown(KeyCode.LeftArrow) && !PlayerController.GetPlayerModel().IsMoving) 
+        } 
+        else if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && !PlayerController.GetPlayerModel().IsMoving) 
         { 
             direction = Vector2.left;
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && !PlayerController.GetPlayerModel().IsMoving)
+        else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && !PlayerController.GetPlayerModel().IsMoving)
         { 
             direction = Vector2.up; 
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !PlayerController.GetPlayerModel().IsMoving) 
+        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && !PlayerController.GetPlayerModel().IsMoving) 
         { 
             direction = Vector2.down; 
         }
 
         if (direction != Vector2.zero)
         {
-            Debug.Log(direction);
+            //Debug.Log(direction);
             PlayerController.MoveConnectedComponents(direction);
         }
         
