@@ -38,11 +38,10 @@ public class LevelOpenService : MonoBehaviour
                 Debug.Log("Locked");
                 break;
             case LevelStatus.Unlocked:
-                SceneManager.LoadScene(levelName);
-                Debug.Log("Unlocked");
+                StartCoroutine(LevelManagerService.Instance.LoadScene(levelName));
                 break;
             case LevelStatus.Completed:
-                Debug.Log("Completed");
+                StartCoroutine(LevelManagerService.Instance.LoadScene(levelName));
                 break;
         }
     }

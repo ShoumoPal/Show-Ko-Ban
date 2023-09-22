@@ -1,21 +1,37 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using System;
+
+
+public enum PanelType
+{
+    PAUSE,
+    LEVEL_COMPLETE,
+    LEVEL_SELECTION
+}
+
+[Serializable]
+public class UIPanel
+{
+    public CanvasGroup CanvasGroup;
+    public RectTransform RectTransform;
+    public PanelType PanelType;
+}
 
 public class UIManager : GenericLazySingleton<UIManager>
 {
+    [SerializeField] private UIPanel[] _panels;
     [SerializeField] private float _fadeTime;
-    [SerializeField] private CanvasGroup _panelCG;
-    [SerializeField] private RectTransform _panelRT;
 
-    public void PanelFadeIn()
+    public void PanelFadeIn(PanelType panelType)
     {
-        Debug.Log("Fade in called");
-        _panelCG.gameObject.SetActive(true);
-        _panelCG.alpha = 0f;
-        _panelRT.transform.localPosition = new Vector3(0f, -1000f, 0f);
-        _panelRT.DOAnchorPos(new Vector2(0f, 0f), _fadeTime, false).SetEase(Ease.Linear);
-        _panelCG.DOFade(1f, _fadeTime);
+        UIPanel panel = Array.Find(_panels, i => i.PanelType == panelType);
+        panel.CanvasGroup.gameObject.SetActive(true);
+        panel.CanvasGroup.alpha = 0f;
+        panel.RectTransform.transform.localPosition = new Vector3(0f, -1000f, 0f);
+        panel.RectTransform.DOAnchorPos(new Vector2(0f, 0f), _fadeTime, false).SetEase(Ease.Linear);
+        panel.CanvasGroup.DOFade(1f, _fadeTime);
     }
 
     public float GetFadeTime()
@@ -23,14 +39,15 @@ public class UIManager : GenericLazySingleton<UIManager>
         return _fadeTime;
     }
 
-    public IEnumerator PanelFadeOut()
+    public IEnumerator PanelFadeOut(PanelType panelType)
     {
-        _panelCG.alpha = 1f;
-        _panelRT.transform.localPosition = new Vector3(0f, 0f, 0f);
-        _panelRT.DOAnchorPos(new Vector2(0f, -1000f), _fadeTime, false).SetEase(Ease.Linear);
-        _panelCG.DOFade(0f, _fadeTime);
+        UIPanel panel = Array.Find(_panels, i => i.PanelType == panelType);
+        panel.CanvasGroup.alpha = 1f;
+        panel.RectTransform.transform.localPosition = new Vector3(0f, 0f, 0f);
+        panel.RectTransform.DOAnchorPos(new Vector2(0f, -1000f), _fadeTime, false).SetEase(Ease.Linear);
+        panel.CanvasGroup.DOFade(0f, _fadeTime);
         yield return new WaitForSeconds(_fadeTime);
 
-        _panelCG.gameObject.SetActive(false);
+        panel.CanvasGroup.gameObject.SetActive(false);
     }
 }

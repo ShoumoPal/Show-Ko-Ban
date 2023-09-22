@@ -4,6 +4,7 @@ using UnityEngine;
 public class EventService : GenericLazySingleton<EventService>
 {
     public event Func<int, bool> OnGoalReached;
+    public event Func<bool> OnRestartClicked;
     public event Action OnShowLevelCompletePanel;
     public event Action OnCameraShake;
 
@@ -18,5 +19,9 @@ public class EventService : GenericLazySingleton<EventService>
     public void InvokeOnCameraShake()
     {
         OnCameraShake?.Invoke();
+    }
+    public bool HasRestarted()
+    {
+        return (bool)OnRestartClicked?.Invoke();
     }
 }

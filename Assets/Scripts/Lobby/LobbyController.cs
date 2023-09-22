@@ -19,20 +19,20 @@ public class LobbyController : MonoBehaviour
     private void CheckSliderFull(float value)
     {
         if (_playSlider.value == _playSlider.maxValue)
-            SceneManager.LoadScene(1);
+            StartCoroutine(LevelManagerService.Instance.LoadScene(LevelManagerService.Instance.Levels[0].LevelName));
     }
 
     private void ShowLevelSelectionPanel()
     {
         AudioService.Instance.PlayFX(SoundType.Button_Click);
         _backgroundUI.blocksRaycasts = false;
-        UIManager.Instance.PanelFadeIn();
+        UIManager.Instance.PanelFadeIn(PanelType.LEVEL_SELECTION);
     }
 
     private void HideLevelSelectionPanel()
     {
         AudioService.Instance.PlayFX(SoundType.Button_Click);
         _backgroundUI.blocksRaycasts = true;
-        StartCoroutine(UIManager.Instance.PanelFadeOut());
+        StartCoroutine(UIManager.Instance.PanelFadeOut(PanelType.LEVEL_SELECTION));
     }
 }

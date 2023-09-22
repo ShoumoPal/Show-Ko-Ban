@@ -7,14 +7,19 @@ public class TileService : GenericLazySingleton<TileService>
 {
 
     List<TileController> tileControllers;
+    [SerializeField] private Transform _wallParent;
+    [SerializeField] private Transform _blockParent;
 
     private void Start()
     {
         tileControllers = new List<TileController>();
-        GameObject[] tileGameObjects = GameObject.FindGameObjectsWithTag("Tile");
-        for (int i = 0;  i < tileGameObjects.Length; i++)
+        foreach(Transform child in _wallParent)
         {
-            tileControllers.Add(tileGameObjects[i].GetComponent<TileController>());
+            tileControllers.Add(child.gameObject.GetComponent<TileController>());
+        }
+        foreach (Transform child in _blockParent)
+        {
+            tileControllers.Add(child.gameObject.GetComponent<TileController>());
         }
     }
 

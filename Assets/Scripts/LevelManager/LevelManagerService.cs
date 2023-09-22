@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,10 +20,17 @@ public enum LevelStatus
 public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
 {
     public Level[] Levels;
+    private bool hasRestarted;
+
+    private void OnEnable()
+    {
+        EventService.Instance.OnRestartClicked += RestartClicked;
+    }
 
     private void Start()
     {
         AudioService.Instance.PlayBG(SoundType.BG_Music_1);
+        hasRestarted = false;
         SetLevelStatus(Levels[0].LevelName, LevelStatus.Unlocked);
     }
 
@@ -31,6 +39,26 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
         // Restart level logic
         if(Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().buildIndex != 0)
             RestartCurrentLevel();
+    }
+
+    public IEnumerator LoadScene(string _levelName)
+    {
+        Debug.Log("Coroutine running");
+        CrossfadeService.Instance.CrossFadeIn(_levelName);
+        yield return new WaitForSeconds(CrossfadeService.Instance.CrossFadeTime);
+        SceneManager.LoadScene(_levelName);
+        CrossfadeService.Instance.CrossFadeOut();
+        yield return new WaitForSeconds(CrossfadeService.Instance.CrossFadeTime);
+    }
+
+    private bool RestartClicked()
+    {
+        return hasRestarted;
+    }
+
+    public void SetRestartClicked(bool _clicked)
+    {
+        hasRestarted = _clicked;
     }
 
     public Level GetLevelBySceneName(string sceneName)
@@ -70,11 +98,18 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
 
     public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        hasRestarted = false;
+        StartCoroutine(LoadScene(GetLevelNameFromIndex(SceneManager.GetActiveScene().buildIndex + 1)));
     }
 
     public void RestartCurrentLevel()
     {
+        hasRestarted = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnDestroy()
+    {
+        EventService.Instance.OnRestartClicked -= RestartClicked;
     }
 }

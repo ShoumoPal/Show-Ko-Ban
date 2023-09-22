@@ -17,7 +17,9 @@ public class MessageBoxController : MonoBehaviour
     private void Start()
     {
         _messagesQueue = new Queue<string>();
-        StartCoroutine(ShowMessages());
+        Debug.Log(EventService.Instance.HasRestarted());
+        if(!EventService.Instance.HasRestarted())
+            StartCoroutine(ShowMessages());
     }
 
     private IEnumerator ShowMessages()
@@ -64,6 +66,7 @@ public class MessageBoxController : MonoBehaviour
 
     private void MessageFadeIn()
     {
+        _messageCG.gameObject.SetActive(true);
         _messageCG.alpha = 0f;
         _messageBoxRT.transform.localPosition = new Vector3(1030f, -1000f, 0f);
         _messageBoxRT.DOAnchorPos(new Vector2(1030f, 140f), _fadeTime, false).SetEase(Ease.InOutBounce);
@@ -74,7 +77,8 @@ public class MessageBoxController : MonoBehaviour
     {
         _messageCG.alpha = 1f;
         _messageBoxRT.transform.localPosition = new Vector3(1030f, 140f, 0f);
-        _messageBoxRT.DOAnchorPos(new Vector2(1030f, -1000f), _fadeTime, false).SetEase(Ease.Linear);
+        _messageBoxRT.DOAnchorPos(new Vector2(1030f, -1000f), _fadeTime, false).SetEase(Ease.InElastic);
         _messageCG.DOFade(0f, _fadeTime);
+        _messageCG.gameObject.SetActive(false);
     }
 }
