@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections;
 using System;
 
+/* Enum for Panel type */
 
 public enum PanelType
 {
@@ -11,6 +12,8 @@ public enum PanelType
     LEVEL_SELECTION
 }
 
+/* Public class for the UIPanel information */
+
 [Serializable]
 public class UIPanel
 {
@@ -18,6 +21,8 @@ public class UIPanel
     public RectTransform RectTransform;
     public PanelType PanelType;
 }
+
+/* UI Manager lazy singleton which manages the panel animations */
 
 public class UIManager : GenericLazySingleton<UIManager>
 {

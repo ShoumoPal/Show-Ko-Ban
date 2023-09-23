@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/* Player service for spawning player and player tile movement */
 
 public class PlayerService : GenericLazySingleton<PlayerService>
 {

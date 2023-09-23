@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+/* Script keeping track of each goal */
+
 public class Goal : MonoBehaviour
 {
     [SerializeField] private bool isOccupied;

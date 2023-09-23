@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/* Player view for MVC */
 
 public class PlayerView : MonoBehaviour
 {

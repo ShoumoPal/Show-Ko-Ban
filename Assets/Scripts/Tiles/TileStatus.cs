@@ -1,3 +1,5 @@
+/* Enum containing tile status */
+
 public enum TileStatus
 {
     WALL,

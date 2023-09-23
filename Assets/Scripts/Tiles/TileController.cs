@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/* Tile controller for each tile */
 
 public class TileController : MonoBehaviour
 {

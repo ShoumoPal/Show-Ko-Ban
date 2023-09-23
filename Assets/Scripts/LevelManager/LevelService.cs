@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+/* Level service for each level containing the UI */
 
 public class LevelService : GenericMonoSingleton<LevelService>
 {
@@ -32,38 +32,47 @@ public class LevelService : GenericMonoSingleton<LevelService>
 
     private void ResumeLevel()
     {
+        _pauseButton.interactable = true;
         AudioService.Instance.PlayFX2(SoundType.PopUp_Sound);
         StartCoroutine(HidePanelWithAnimation(PanelType.PAUSE));
     }
 
     private void GoToLobby()
     {
+        AudioService.Instance.PlayFX(SoundType.Button_Click);
+        AudioService.Instance.StopBG2();
         LevelManagerService.Instance.SetRestartClicked(false);
         Time.timeScale = 1f;
+        _pauseButton.interactable = true;
         StartCoroutine(LevelManagerService.Instance.LoadScene("Lobby"));
     }
 
     private void RestartLevel()
     {
         Time.timeScale = 1f;
-        AudioService.Instance.PlayFX(SoundType.PopUp_Sound);
+        _pauseButton.interactable = true;
+        AudioService.Instance.PlayFX(SoundType.Button_Click);
         LevelManagerService.Instance.RestartCurrentLevel();
     }
 
     private void ShowPauseMenu()
     {
         AudioService.Instance.PlayFX2(SoundType.PopUp_Sound);
+        _pauseButton.interactable = false;
         StartCoroutine(ShowPanelWithAnimation(PanelType.PAUSE));
     }
 
     private void GoToNextLevel()
     {
         Time.timeScale = 1f;
+        _pauseButton.interactable = true;
+        AudioService.Instance.PlayFX(SoundType.Button_Click);
         LevelManagerService.Instance.LoadNextLevel();
     }
 
     public void ShowLevelCompletePanel()
     {
+        _pauseButton.interactable = false;
         AudioService.Instance.PlayFX(SoundType.Win_Sound);
         StartCoroutine(ShowPanelWithAnimation(PanelType.LEVEL_COMPLETE));
     }

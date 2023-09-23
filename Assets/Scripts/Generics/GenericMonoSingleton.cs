@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* Generic Monobehaviour singleton which stays throughout the scenes */
+
 public class GenericMonoSingleton<T> : MonoBehaviour where T : GenericMonoSingleton<T>
 {
     private static T instance;

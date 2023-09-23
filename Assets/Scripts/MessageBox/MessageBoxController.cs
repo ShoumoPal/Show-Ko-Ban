@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/* Message Box controller which manages the dialogue boxes for tutorials and tips */
+
 public class MessageBoxController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _messageText;

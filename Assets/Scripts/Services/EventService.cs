@@ -1,5 +1,6 @@
 using System;
-using UnityEngine;
+
+/* Script containing event for Observer Pattern */
 
 public class EventService : GenericLazySingleton<EventService>
 {

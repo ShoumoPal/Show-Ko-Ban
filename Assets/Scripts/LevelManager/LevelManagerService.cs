@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/* public class for keeping level information */
+
 [Serializable]
 public class Level
 {
@@ -10,12 +12,16 @@ public class Level
     public Vector3 spawnPoint;
 }
 
+/* Enum for storing status of the levels */
+
 public enum LevelStatus
 {
     Locked,
     Unlocked,
     Completed
 }
+
+/* Level manager service which persists throughout the game */
 
 public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
 {
@@ -41,9 +47,19 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
             RestartCurrentLevel();
     }
 
+    // Co-routine for loading the scenes with transition */
+
     public IEnumerator LoadScene(string _levelName)
     {
-        Debug.Log("Coroutine running");
+        if(_levelName == Levels[0].LevelName)
+        {
+            AudioService.Instance.StopBG2();
+        }
+        if(_levelName == Levels[4].LevelName)
+        {
+            AudioService.Instance.PlayBG2(SoundType.Interstellar);
+        }
+
         CrossfadeService.Instance.CrossFadeIn(_levelName);
         yield return new WaitForSeconds(CrossfadeService.Instance.CrossFadeTime);
         SceneManager.LoadScene(_levelName);
@@ -99,12 +115,15 @@ public class LevelManagerService : GenericMonoSingleton<LevelManagerService>
     public void LoadNextLevel()
     {
         hasRestarted = false;
-        StartCoroutine(LoadScene(GetLevelNameFromIndex((SceneManager.GetActiveScene().buildIndex + 1) % (Levels.Length + 1))));
+        int sceneNumber = SceneManager.GetActiveScene().buildIndex + 1;
+
+        StartCoroutine(LoadScene(GetLevelNameFromIndex(sceneNumber % (Levels.Length + 1))));
     }
 
     public void RestartCurrentLevel()
     {
         hasRestarted = true;
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+/* Script responsible for changing PP profile for the bonus feature */
+
 public class PostProcessChangeController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _triesText;
@@ -30,7 +32,7 @@ public class PostProcessChangeController : MonoBehaviour
     {
         isRunning = true;
 
-        AudioService.Instance.PlayFX2(SoundType.Interference);
+        AudioService.Instance.PlayFX3(SoundType.Interference);
         ChangeTriesText(--_tries);
         _globalVolume.profile = _secondaryProfile;
         yield return new WaitForSeconds(_revealTime);

@@ -1,7 +1,8 @@
 using DG.Tweening;
-using System.Collections;
 using TMPro;
 using UnityEngine;
+
+/* Script for cross-fade transition */
 
 public class CrossfadeService : GenericMonoSingleton<CrossfadeService>
 {
