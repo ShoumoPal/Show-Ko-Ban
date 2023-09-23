@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* Script managing all goals present in the scene */
+
 public class GoalManager : GenericLazySingleton<GoalManager>
 {
     public bool isGoalReached;

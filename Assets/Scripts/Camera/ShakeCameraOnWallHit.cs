@@ -1,6 +1,8 @@
 using Cinemachine;
-using TMPro;
 using UnityEngine;
+
+
+/* Responsible for Camera shke using Cinemachine */
 
 public class ShakeCameraOnWallHit : MonoBehaviour
 {

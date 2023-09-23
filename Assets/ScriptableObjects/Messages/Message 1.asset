@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Messages:
   - welcome!
-  - Press WASD or arrow keys to move! Connect with other blocks to fill the target
+  - Press WASD or arrow keys to move! Connect with other blocks to fill the <color=yellow>target</color>
     area!
   - Press 'R' to restart the level if you are stuck :^)
   - enjoy!

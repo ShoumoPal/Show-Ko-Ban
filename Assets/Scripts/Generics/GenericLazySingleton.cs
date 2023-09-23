@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+/* Lazy Generic Singleton which gets destroyed on new level */
+
 public class GenericLazySingleton<T> : MonoBehaviour where T : GenericLazySingleton<T>
 {
     private static T instance;

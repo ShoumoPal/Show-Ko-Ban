@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+/* Player service for spawning player and player tile movement */
 
 public class PlayerService : GenericLazySingleton<PlayerService>
 {
@@ -46,7 +47,6 @@ public class PlayerService : GenericLazySingleton<PlayerService>
             if (obj.GetInstanceID() ==  playerController.PlayerView.transform.GetChild(i).gameObject.GetInstanceID() || obj.GetComponent<TileController>().tileStatus == TileStatus.PLAYER)
                 return true;
         }
-        Debug.Log("Returning false");
         return false;
     }
 

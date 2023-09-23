@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+/* Enum containing tile status */
 
 public enum TileStatus
 {
     WALL,
     BLOCK,
-    PLAYER
+    PLAYER,
+    HIDDEN
 }

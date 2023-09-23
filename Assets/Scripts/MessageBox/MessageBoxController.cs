@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/* Message Box controller which manages the dialogue boxes for tutorials and tips */
+
 public class MessageBoxController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _messageText;
@@ -36,7 +38,7 @@ public class MessageBoxController : MonoBehaviour
         {
             AudioService.Instance.PlayFX2(SoundType.PopUp_Sound);
             DisplayNextMessage();
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(3f);
         }
 
         AudioService.Instance.PlayFX2(SoundType.PopUp_Sound);
@@ -60,7 +62,7 @@ public class MessageBoxController : MonoBehaviour
         foreach(char letter in _message.ToCharArray())
         {
             _messageText.text += letter;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 

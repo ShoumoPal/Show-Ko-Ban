@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+/* Level opening service present on each button */
 
 [RequireComponent (typeof(Button))]
 public class LevelOpenService : MonoBehaviour

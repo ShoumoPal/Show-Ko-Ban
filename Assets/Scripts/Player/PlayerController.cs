@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
+
+/* Player controller for MVC */
 
 public class PlayerController 
 {

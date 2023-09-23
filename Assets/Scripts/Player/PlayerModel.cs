@@ -1,5 +1,7 @@
 using UnityEngine;
 
+/* Player model for MVC */
+
 public class PlayerModel
 {
     public PlayerController PlayerController { get; set; }
